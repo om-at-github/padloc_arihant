@@ -13,7 +13,7 @@ function removeTrailingSlash(url) {
 }
 
 const out = process.env.PL_ADMIN_DIR || resolve(__dirname, "dist");
-const serverUrl = process.env.PL_SERVER_URL || `http://0.0.0.0:${process.env.PL_SERVER_PORT || 3000}`;
+const serverUrl = process.env.PL_SERVER_URL || `http://localhost:${process.env.PL_SERVER_PORT || 3000}`;
 const pwaUrl = process.env.PL_PWA_URL || `http://localhost:${process.env.PL_ADMIN_PORT || 9090}`;
 const rootDir = resolve(__dirname, "../..");
 const assetsDir = resolve(rootDir, process.env.PL_ASSETS_DIR || "assets");
@@ -106,9 +106,8 @@ module.exports = {
                             }
 
                             // Add the websocket URL + PWA URL of webpack-dev-server to connect-src when building locally, or nothing otherwise
-                            const connectReplacement = `ws://localhost:${
-                                process.env.PL_ADMIN_PORT || 9090
-                            }/ws ${adminUrl}`;
+                            const connectReplacement = `ws://localhost:${process.env.PL_ADMIN_PORT || 9090
+                                }/ws ${adminUrl}`;
                             data.html = data.html.replace("[REPLACE_CONNECT]", connectReplacement);
 
                             callback(null, data);
